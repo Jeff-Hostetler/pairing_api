@@ -1,0 +1,7 @@
+/.idea/*
+/vendor/*
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
