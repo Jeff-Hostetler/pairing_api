@@ -2,8 +2,8 @@ require "rails_helper"
 
 describe "Wines API" do
   before do
-    @riesling = Wine.create!(name: "riesling", color: "white")
-    @malbec = Wine.create!(name: "malbec", color: "red")
+    @riesling = Wine.create!(name: "riesling", category: "white")
+    @malbec = Wine.create!(name: "malbec", category: "red")
   end
   
   it "allows a request to get all wines" do
@@ -12,7 +12,7 @@ describe "Wines API" do
           wines {
             id
             name
-            color
+            category
           }
         }
     GQL
@@ -26,7 +26,7 @@ describe "Wines API" do
 
     riesling_response = wines_response.find {|wine| wine[:id] == @riesling.id}
     expect(riesling_response[:name]).to eq("riesling")
-    expect(riesling_response[:color]).to eq("white")
+    expect(riesling_response[:category]).to eq("white")
   end
 
   it "gets requested keys" do
@@ -62,10 +62,10 @@ describe "Wines API" do
     expect(wines_response.map {|wine| wine[:id]}).to match_array([@riesling.id])
   end
 
-  it "can search by color" do
+  it "can search by category" do
     query = <<-GQL
         {
-          wines(color: "red") {
+          wines(category: "red") {
             id
           }
         }
