@@ -5,7 +5,8 @@ class Food < ActiveRecord::Base
   enum category: {
     veg: "veg",
     fruit: "fruit",
-    protein: "protein",
+    meat: "meat",
+    fish: "fish",
     starch: "starch",
     sauce: "sauce"
   }

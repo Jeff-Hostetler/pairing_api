@@ -93,6 +93,6 @@ describe "Wines API" do
 
     expect(response.status).to eq(422)
     response_body = JSON.parse(response.body, symbolize_names: true)
-    expect(response_body[:errors][0][:message]).to eq "Field 'fake' doesn't exist on type 'Wine'"
+    expect(response_body[:errors][0][:message]).to eq("Field 'fake' doesn't exist on type 'Wine'")
   end
 end

@@ -10,16 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026175951) do
+ActiveRecord::Schema.define(version: 20171026214139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "flavors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "food_flavors", force: :cascade do |t|
+    t.bigint "food_id"
+    t.bigint "flavor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flavor_id"], name: "index_food_flavors_on_flavor_id"
+    t.index ["food_id"], name: "index_food_flavors_on_food_id"
+  end
 
   create_table "foods", force: :cascade do |t|
     t.string "name"
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "wine_flavors", force: :cascade do |t|
+    t.bigint "wine_id"
+    t.bigint "flavor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["flavor_id"], name: "index_wine_flavors_on_flavor_id"
+    t.index ["wine_id"], name: "index_wine_flavors_on_wine_id"
+  end
+
+  create_table "wine_regions", force: :cascade do |t|
+    t.bigint "wine_id"
+    t.bigint "region_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["region_id"], name: "index_wine_regions_on_region_id"
+    t.index ["wine_id"], name: "index_wine_regions_on_wine_id"
   end
 
   create_table "wines", force: :cascade do |t|

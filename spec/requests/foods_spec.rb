@@ -3,7 +3,7 @@ require "rails_helper"
 describe "Foods API" do
   before do
     @mushroom = Food.create!(name: "Mushroom", category: "veg")
-    @new_york_strip = Food.create!(name: "New York Strip", category: "protein")
+    @new_york_strip = Food.create!(name: "New York Strip", category: "meat")
   end
   
   it "allows a request to get all foods" do
@@ -49,7 +49,7 @@ describe "Foods API" do
   it "can search by category" do
     query = <<-GQL
         {
-          foods(category: "protein") {
+          foods(category: "meat") {
             id
           }
         }
@@ -77,6 +77,6 @@ describe "Foods API" do
 
     expect(response.status).to eq(422)
     response_body = JSON.parse(response.body, symbolize_names: true)
-    expect(response_body[:errors][0][:message]).to eq "Field 'fake' doesn't exist on type 'Food'"
+    expect(response_body[:errors][0][:message]).to eq("Field 'fake' doesn't exist on type 'Food'")
   end
 end
